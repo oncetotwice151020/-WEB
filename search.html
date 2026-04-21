@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sony Alpha Search</title>
+  <script>
+    try {
+      if (sessionStorage.getItem("sonySearchTransition") === "1") {
+        document.documentElement.classList.add("search-arriving");
+      }
+    } catch (error) {}
+  </script>
+  <link rel="stylesheet" href="style.css?v=search-shop-nav" />
+</head>
+<body class="search-page">
+  <header class="navbar">
+    <div class="nav-inner">
+      <a class="logo" href="index.html" aria-label="Sony Alpha Hub">
+        <span class="logo-sony">
+          <img src="images/sony_logo_icon_249569.png" alt="SONY">
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="&#39029;&#38754;&#23548;&#33322;">
+        <a href="shop.html">&#36827;&#20837;&#21830;&#22478;</a>
+        <a href="index.html">&#36820;&#22238;&#39318;&#39029;</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="search-shell">
+    <section class="search-hero" aria-labelledby="search-title">
+      <div class="search-title-block">
+        <p>ALPHA SYSTEM</p>
+        <h1 id="search-title">&#20135;&#21697;&#26816;&#32034;</h1>
+      </div>
+      <div class="search-visual" aria-hidden="true">
+        <img src="images/home_alpha1ii_alphauniverse_hero.jpg" alt="">
+      </div>
+    </section>
+
+    <section class="search-console" aria-label="&#26816;&#32034;&#26465;&#20214;">
+      <div class="search-row">
+        <div class="search-field">
+          <label for="product-search">
+            <span>&#20851;&#38190;&#35789;</span>
+          </label>
+          <div class="search-input-wrap">
+            <input id="product-search" type="search" placeholder="A1 II / A12 / GM / Vlog / &#20154;&#20687;" autocomplete="off" aria-autocomplete="list" aria-controls="search-suggestions" aria-expanded="false">
+            <div class="search-suggestions hidden" id="search-suggestions" role="listbox" aria-label="&#30456;&#20851;&#25628;&#32034;"></div>
+          </div>
+        </div>
+
+        <div class="search-tabs" aria-label="&#20135;&#21697;&#31867;&#22411;">
+          <button class="is-active" type="button" data-type="all">&#20840;&#37096;</button>
+          <button type="button" data-type="camera">&#30456;&#26426;</button>
+          <button type="button" data-type="lens">&#38236;&#22836;</button>
+        </div>
+      </div>
+
+      <div class="search-chip-row" aria-label="&#29992;&#36884;&#31579;&#36873;">
+        <button class="is-active" type="button" data-purpose="all">&#20840;&#37096;&#29992;&#36884;</button>
+        <button type="button" data-purpose="pro">&#19987;&#19994;&#26071;&#33328;</button>
+        <button type="button" data-purpose="video">&#35270;&#39057;&#21019;&#20316;</button>
+        <button type="button" data-purpose="travel">&#26053;&#34892;&#36731;&#37327;</button>
+        <button type="button" data-purpose="portrait">&#20154;&#20687;</button>
+        <button type="button" data-purpose="action">&#39640;&#36895;&#25235;&#25293;</button>
+      </div>
+    </section>
+
+    <section class="search-results-section" aria-live="polite">
+      <div class="search-result-bar">
+        <p id="search-summary">&#27491;&#22312;&#36733;&#20837;&#20135;&#21697;</p>
+        <p id="search-count">0</p>
+      </div>
+      <div class="search-results-grid" id="search-results"></div>
+      <p class="search-empty hidden" id="search-empty">&#27809;&#26377;&#25214;&#21040;&#21305;&#37197;&#20135;&#21697;&#12290;</p>
+    </section>
+  </main>
+
+  <script src="data/sony_official_products_search.js" charset="UTF-8"></script>
+  <script src="data/sony_official_product_details.js" charset="UTF-8"></script>
+  <script src="search.js?v=shop-circle-sync" charset="UTF-8"></script>
+</body>
+</html>
