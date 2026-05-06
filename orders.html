@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sony Alpha Orders</title>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <link rel="stylesheet" href="style.css?v=clean-nav-labels" />
+</head>
+<body class="orders-page">
+  <header class="navbar">
+    <div class="nav-inner">
+      <div class="logo" aria-label="Sony Alpha Orders">
+        <a class="logo-sony" href="index.html" aria-label="Sony 首页">
+          <img src="images/sony-seeklogo.png" alt="SONY" />
+        </a>
+        <a class="logo-shop-title" href="orders.html" aria-label="刷新我的订单">我的订单</a>
+      </div>
+      <nav class="nav-links" aria-label="页面导航">
+        <a href="shop.html#shop-contact-footer">联系我们</a>
+        <a href="shop.html">影像商城</a>
+        <a href="search.html">产品检索</a>
+        <div class="nav-dropdown">
+          <a class="nav-dropdown-trigger" href="orders.html">我的</a>
+          <div class="nav-dropdown-menu" aria-label="我的菜单">
+            <a href="orders.html">我的订单</a>
+            <a href="settings.html">设置</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="orders-shell">
+    <section class="orders-quick-panel" id="orders-quick-panel" aria-label="订单快捷入口">
+      <div class="orders-profile-row">
+        <button type="button" class="orders-stat-link" data-orders-view="footprints" aria-pressed="false">
+          <strong>足迹</strong>
+          <span id="orders-footprint-count">0</span>
+        </button>
+        <a href="shop.html" class="orders-stat-link">
+          <strong>收藏</strong>
+          <span>0</span>
+        </a>
+        <a href="shop.html#shop-contact-footer" class="orders-stat-link">
+          <strong>优惠</strong>
+          <span>0</span>
+        </a>
+        <a href="shop.html" class="orders-seed-link">
+          <strong>种草</strong>
+          <span>发现</span>
+        </a>
+      </div>
+
+      <div class="orders-status-row">
+        <button type="button" class="orders-quick-action" data-order-filter="pay">
+          <i aria-hidden="true">□</i>
+          <span>待付款</span>
+          <b id="orders-count-pay">0</b>
+        </button>
+        <button type="button" class="orders-quick-action" data-order-filter="receive">
+          <i aria-hidden="true">▣</i>
+          <span>待收货</span>
+          <b id="orders-count-receive">0</b>
+        </button>
+        <button type="button" class="orders-quick-action" data-order-filter="use">
+          <i aria-hidden="true">▯</i>
+          <span>待使用</span>
+          <b id="orders-count-use">0</b>
+        </button>
+        <button type="button" class="orders-quick-action" data-order-filter="review">
+          <i aria-hidden="true">☻</i>
+          <span>评价</span>
+          <b id="orders-count-review">0</b>
+        </button>
+        <button type="button" class="orders-quick-action" data-order-filter="aftersale">
+          <i aria-hidden="true">¥</i>
+          <span>退换/售后</span>
+          <b id="orders-count-aftersale">0</b>
+        </button>
+        <button type="button" class="orders-quick-action orders-all-action" data-order-filter="all">
+          <strong>订单</strong>
+          <em id="orders-count-all">0</em>
+          <small aria-hidden="true">›</small>
+        </button>
+      </div>
+    </section>
+
+    <section class="orders-footprints-view hidden" id="orders-footprints-view" aria-labelledby="orders-footprints-title">
+      <div class="orders-footprints-head">
+        <div>
+          <h2 id="orders-footprints-title">我的足迹</h2>
+        </div>
+        <div class="orders-footprints-actions">
+          <button type="button" id="orders-clear-footprints">删除浏览记录</button>
+          <button type="button" data-orders-view="orders">返回订单</button>
+        </div>
+      </div>
+      <div class="orders-footprints-grid" id="orders-footprints-grid"></div>
+      <div class="orders-footprints-empty hidden" id="orders-footprints-empty">
+        <h3>暂无浏览足迹</h3>
+        <a href="shop.html">去影像商城看看</a>
+      </div>
+    </section>
+
+    <section class="orders-workspace" aria-label="订单中心">
+      <aside class="orders-list-panel" aria-label="订单列表">
+        <div class="orders-panel-head">
+          <div>
+            <h2>订单记录</h2>
+          </div>
+          <button class="orders-manage" type="button" id="orders-manage" aria-pressed="false">管理</button>
+        </div>
+        <div class="orders-list" id="orders-list"></div>
+        <div class="orders-bulk-bar hidden" id="orders-bulk-bar">
+          <span id="orders-selected-count">已选择 0 个订单</span>
+          <div>
+            <button type="button" id="orders-cancel-manage">取消</button>
+            <button type="button" id="orders-delete-selected" disabled>删除</button>
+          </div>
+        </div>
+      </aside>
+
+      <section class="orders-detail-panel" id="orders-detail-panel" aria-live="polite">
+        <div class="orders-empty-detail">
+          <h2>选择一张订单</h2>
+          <span>订单的商品、配送、支付与状态会显示在这里。</span>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <section class="shop-remove-confirm" id="orders-delete-confirm" aria-hidden="true">
+    <div class="shop-remove-confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="orders-delete-title">
+      <h2 id="orders-delete-title">确认删除订单？</h2>
+      <span>选中的订单记录会从本地订单中移除。</span>
+      <div class="shop-remove-confirm-actions">
+        <button class="shop-remove-confirm-cancel" type="button" id="orders-delete-cancel">取消</button>
+        <button class="shop-remove-confirm-accept" type="button" id="orders-delete-accept">确认删除</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="shop-remove-confirm" id="orders-delete-blocked" aria-hidden="true">
+    <div class="shop-remove-confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="orders-delete-blocked-title">
+      <h2 id="orders-delete-blocked-title">当前状态暂不可删除</h2>
+      <span>待付款和正在进行中的订单不可删除，订单结束后即可删除。</span>
+      <div class="shop-remove-confirm-actions">
+        <button class="shop-remove-confirm-accept" type="button" id="orders-delete-blocked-close">我知道了</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="shop-remove-confirm" id="orders-receive-confirm" aria-hidden="true">
+    <div class="shop-remove-confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="orders-receive-title">
+      <h2 id="orders-receive-title">确认收货？</h2>
+      <span>请在确认商品完好和无质量问题时确认收货</span>
+      <div class="shop-remove-confirm-actions">
+        <button class="shop-remove-confirm-cancel" type="button" id="orders-receive-cancel">取消</button>
+        <button class="shop-remove-confirm-accept" type="button" id="orders-receive-accept">确认收货</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="shop-checkout" id="orders-checkout-panel" aria-hidden="true" aria-label="收银台">
+    <div class="shop-checkout-dialog" role="dialog" aria-modal="true" aria-labelledby="orders-checkout-title">
+      <button class="shop-checkout-close shop-payment-close-icon" type="button" id="orders-checkout-close" aria-label="取消支付">×</button>
+      <h2 id="orders-checkout-title">收银台</h2>
+      <div class="shop-checkout-timer" aria-live="polite">
+        <span>剩余订单有效时间</span>
+        <strong id="orders-checkout-timer">05:00</strong>
+      </div>
+      <div class="shop-checkout-grid">
+        <label>
+          <span>姓</span>
+          <input id="orders-checkout-last-name" type="text" />
+        </label>
+        <label>
+          <span>名</span>
+          <input id="orders-checkout-first-name" type="text" />
+        </label>
+        <label>
+          <span>联系电话</span>
+          <div class="shop-phone-field">
+            <span class="shop-country-code">
+              <img src="images/china_flag.png" alt="中国" />
+              <strong>+86</strong>
+            </span>
+            <input id="orders-checkout-phone" type="tel" inputmode="tel" />
+          </div>
+        </label>
+        <label>
+          <span>邮箱</span>
+          <input id="orders-checkout-email" type="email" />
+        </label>
+        <div class="shop-checkout-wide shop-address-field">
+          <span>配送地址</span>
+          <div class="shop-address-picker">
+            <select id="orders-checkout-province" aria-label="选择省份">
+              <option value="">省 / 直辖市</option>
+            </select>
+            <select id="orders-checkout-city" aria-label="选择城市">
+              <option value="">城市</option>
+            </select>
+            <select id="orders-checkout-district" aria-label="选择区县">
+              <option value="">区 / 县</option>
+            </select>
+          </div>
+          <div class="shop-address-detail-row">
+            <input id="orders-checkout-address-detail" type="text" placeholder="请输入详细地址，如街道、门牌号" />
+            <button class="shop-address-map-trigger" type="button" id="orders-checkout-address-map-open">地图选址</button>
+          </div>
+        </div>
+        <div class="shop-checkout-wide shop-payment-field">
+          <span>支付方式</span>
+          <div class="shop-payment-select">
+            <select id="orders-checkout-payment" aria-label="选择支付方式">
+              <option value="WeChat Pay">WeChat Pay</option>
+              <option value="Alipay">Alipay</option>
+              <option value="UnionPay">UnionPay</option>
+              <option value="Mastercard">Mastercard</option>
+              <option value="VISA">VISA</option>
+              <option value="JCB">JCB</option>
+              <option value="American Express">American Express</option>
+              <option value="PayPal">PayPal</option>
+            </select>
+            <span class="shop-payment-logo">
+              <img id="orders-checkout-payment-logo" src="images/wechatpay_logo.png" alt="WeChat Pay" />
+            </span>
+          </div>
+        </div>
+        <div class="shop-card-fields hidden" id="orders-card-fields">
+          <label>
+            <span>卡号</span>
+            <input id="orders-card-number" type="text" inputmode="numeric" autocomplete="cc-number" />
+          </label>
+          <label>
+            <span>CVV</span>
+            <input id="orders-card-cvv" type="text" inputmode="numeric" autocomplete="cc-csc" />
+          </label>
+        </div>
+        <label class="shop-delivery-field">
+          <span>配送方式</span>
+          <select id="orders-checkout-delivery">
+            <option>标准配送</option>
+            <option>门店自提</option>
+            <option>当日送达</option>
+          </select>
+        </label>
+      </div>
+      <p class="shop-checkout-error hidden" id="orders-checkout-error" aria-live="polite"></p>
+      <div class="shop-checkout-total">
+        <span>应付金额</span>
+        <strong id="orders-checkout-total">¥0</strong>
+      </div>
+      <div class="shop-checkout-breakdown" aria-label="金额明细">
+        <div><span>商品总价</span><strong id="orders-checkout-products-total">¥0</strong></div>
+        <div><span>配送费</span><strong id="orders-checkout-delivery-fee">¥0</strong></div>
+      </div>
+      <button class="shop-pay-button" type="button" id="orders-pay-button">确认支付</button>
+      <p class="shop-checkout-hint">这是演示结算界面，不会产生真实订单或付款。</p>
+    </div>
+  </section>
+
+  <section class="shop-payment-modal" id="orders-qr-modal" aria-hidden="true">
+    <div class="shop-payment-dialog" role="dialog" aria-modal="true" aria-labelledby="orders-qr-title">
+      <button class="shop-payment-close shop-payment-close-icon" type="button" id="orders-qr-close" aria-label="关闭">×</button>
+      <h2 id="orders-qr-title">扫码支付</h2>
+      <div class="shop-qr-brand">
+        <img id="orders-qr-logo" src="images/wechatpay_logo.png" alt="WeChat Pay" />
+        <span id="orders-qr-name">WeChat Pay</span>
+      </div>
+      <div class="shop-qr-code" aria-label="支付二维码"></div>
+      <button class="shop-pay-button" type="button" id="orders-qr-complete">我已完成支付</button>
+    </div>
+  </section>
+
+  <section class="shop-payment-modal" id="orders-payment-loading" aria-hidden="true">
+    <div class="shop-payment-dialog shop-payment-loading-dialog" role="dialog" aria-modal="true" aria-label="支付处理中">
+      <div class="shop-payment-spinner" aria-hidden="true"></div>
+      <h2>正在处理支付</h2>
+      <span>请稍候，正在确认付款结果。</span>
+    </div>
+  </section>
+
+  <section class="shop-payment-modal" id="orders-payment-success" aria-hidden="true">
+    <div class="shop-payment-dialog shop-payment-success-dialog" role="dialog" aria-modal="true" aria-labelledby="orders-success-title">
+      <button class="shop-payment-close shop-payment-close-icon" type="button" id="orders-success-close" aria-label="关闭">×</button>
+      <h2 id="orders-success-title">支付成功</h2>
+      <div class="shop-success-details" id="orders-success-details"></div>
+    </div>
+  </section>
+
+  <section class="shop-payment-modal" id="orders-address-map-modal" aria-hidden="true">
+    <div class="shop-payment-dialog shop-address-map-dialog" role="dialog" aria-modal="true" aria-labelledby="orders-address-map-title">
+      <button class="shop-payment-close shop-payment-close-icon" type="button" id="orders-address-map-close" aria-label="关闭">×</button>
+      <h2 id="orders-address-map-title">地图选址</h2>
+      <span class="shop-address-map-copy">点击地图自动识别省市区县并回填详细地址</span>
+      <div class="shop-address-map-shell">
+        <div id="checkout-address-map" aria-label="配送地址地图"></div>
+      </div>
+      <p class="shop-address-map-note" id="orders-address-map-note">请在地图上单击需要配送的位置</p>
+    </div>
+  </section>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script src="orders.js?v=clean-nav-labels" charset="UTF-8"></script>
+</body>
+</html>

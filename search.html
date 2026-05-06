@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sony Alpha Search</title>
+  <script>
+    try {
+      if (sessionStorage.getItem("sonySearchTransition") === "1") {
+        document.documentElement.classList.add("search-arriving");
+      }
+    } catch (error) {}
+  </script>
+  <link rel="stylesheet" href="style.css?v=clean-nav-labels" />
+</head>
+<body class="search-page">
+  <header class="navbar">
+    <div class="nav-inner">
+      <a class="logo" href="index.html" aria-label="Sony Alpha Hub">
+        <span class="logo-sony">
+          <img src="images/sony-seeklogo.png" alt="SONY">
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="&#39029;&#38754;&#23548;&#33322;">
+        <a href="#search-contact-footer">&#32852;&#31995;&#25105;&#20204;</a>
+        <a href="shop.html">&#36827;&#20837;&#21830;&#22478;</a>
+        <div class="nav-dropdown">
+          <a class="nav-dropdown-trigger" href="orders.html">&#25105;&#30340;</a>
+          <div class="nav-dropdown-menu" aria-label="&#25105;&#30340;&#33756;&#21333;">
+            <a href="orders.html">&#25105;&#30340;&#35746;&#21333;</a>
+            <a href="settings.html">&#35774;&#32622;</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="search-shell">
+    <section class="search-hero" aria-labelledby="search-title">
+      <div class="search-title-block">
+        <h1 id="search-title">&#20135;&#21697;&#26816;&#32034;</h1>
+      </div>
+      <div class="search-visual" aria-hidden="true">
+        <img src="images/home_alpha1ii_alphauniverse_hero.jpg" alt="">
+      </div>
+    </section>
+
+    <section class="search-console" aria-label="&#26816;&#32034;&#26465;&#20214;">
+      <div class="search-row">
+        <div class="search-field">
+          <label for="product-search">
+            <span>&#20851;&#38190;&#35789;</span>
+          </label>
+          <div class="search-input-wrap">
+            <input id="product-search" type="search" placeholder="A1 II / A12 / GM / Vlog / &#20154;&#20687;" autocomplete="off" aria-autocomplete="list" aria-controls="search-suggestions" aria-expanded="false">
+            <div class="search-suggestions hidden" id="search-suggestions" role="listbox" aria-label="&#30456;&#20851;&#25628;&#32034;"></div>
+          </div>
+        </div>
+
+        <div class="search-tabs" aria-label="&#20135;&#21697;&#31867;&#22411;">
+          <button class="is-active" type="button" data-type="all">&#20840;&#37096;</button>
+          <button type="button" data-type="camera">&#30456;&#26426;</button>
+          <button type="button" data-type="lens">&#38236;&#22836;</button>
+        </div>
+      </div>
+
+      <div class="search-chip-row" aria-label="&#29992;&#36884;&#31579;&#36873;">
+        <button class="is-active" type="button" data-purpose="all">&#20840;&#37096;&#29992;&#36884;</button>
+        <button type="button" data-purpose="pro">&#19987;&#19994;&#26071;&#33328;</button>
+        <button type="button" data-purpose="video">&#35270;&#39057;&#21019;&#20316;</button>
+        <button type="button" data-purpose="travel">&#26053;&#34892;&#36731;&#37327;</button>
+        <button type="button" data-purpose="portrait">&#20154;&#20687;</button>
+        <button type="button" data-purpose="action">&#39640;&#36895;&#25235;&#25293;</button>
+      </div>
+    </section>
+
+    <section class="search-results-section" aria-live="polite">
+      <div class="search-result-bar">
+        <p id="search-summary">&#27491;&#22312;&#36733;&#20837;&#20135;&#21697;</p>
+        <p id="search-count">0</p>
+      </div>
+      <div class="search-results-grid" id="search-results"></div>
+      <p class="search-empty hidden" id="search-empty">&#27809;&#26377;&#25214;&#21040;&#21305;&#37197;&#20135;&#21697;&#12290;</p>
+    </section>
+
+    <footer class="shop-contact-footer" id="search-contact-footer" aria-labelledby="search-contact-title">
+      <div class="shop-contact-inner">
+        <div class="shop-contact-copy">
+          <h2 id="search-contact-title">联系我们</h2>
+          <span>关注索尼中国官方账号，获取新品、活动与影像内容更新。</span>
+        </div>
+        <div class="shop-contact-links" aria-label="索尼中国官方社交账号">
+          <a class="shop-contact-link" href="https://space.bilibili.com/1429723107?spm_id_from=333.337.0.0" target="_blank" rel="noreferrer" aria-label="打开索尼中国哔哩哔哩官方账号主页">
+            <img src="images/bilibili_logo.png" alt="哔哩哔哩" />
+            <span>哔哩哔哩</span>
+          </a>
+          <a class="shop-contact-link" href="https://www.douyin.com/user/MS4wLjABAAAA67f0nhhRAUosOYwptIDkpNHlU0Zo2-EimRxWxH77a64?from_tab_name=main" target="_blank" rel="noreferrer" aria-label="打开索尼抖音官方账号主页">
+            <img src="images/douyin_logo.png" alt="抖音" />
+            <span>抖音</span>
+          </a>
+          <a class="shop-contact-link" href="https://weibo.com/sonychina" target="_blank" rel="noreferrer" aria-label="打开索尼中国官方微博">
+            <img src="images/weibo_logo.png" alt="微博" />
+            <span>微博</span>
+          </a>
+          <button class="shop-contact-link search-contact-trigger" type="button" id="search-wechat-trigger" aria-label="打开索尼中国微信公众号二维码">
+            <img src="images/wechat_logo.png" alt="微信" />
+            <span>微信</span>
+          </button>
+          <a class="shop-contact-link" href="https://www.xiaohongshu.com/user/profile/5bc97c9b288ea800016dcd28?xsec_token=AB4Wen2yiWsQnJj4LtcojFpSLNSkHB_h9EkloKzpyBQzI%3D&xsec_source=pc_search" target="_blank" rel="noreferrer" aria-label="打开索尼小红书官方账号主页">
+            <img src="images/xiaohongshu_logo.png" alt="小红书" />
+            <span>小红书</span>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <section class="shop-payment-modal" id="search-wechat-modal" aria-hidden="true">
+    <div class="shop-payment-dialog shop-wechat-dialog" role="dialog" aria-modal="true" aria-labelledby="search-wechat-title">
+      <button class="shop-payment-close shop-payment-close-icon" type="button" id="search-wechat-close" aria-label="关闭">×</button>
+      <h2 id="search-wechat-title">微信</h2>
+      <span class="shop-wechat-copy">
+        <span>请使用微信扫描下方二维码</span>
+        <span>关注索尼中国专业公众号</span>
+      </span>
+      <div class="shop-wechat-qr">
+        <img src="images/sony_wechat_qr.png" alt="索尼中国专业公众号二维码" />
+      </div>
+    </div>
+  </section>
+
+  <script src="data/sony_official_products_search.js" charset="UTF-8"></script>
+  <script src="data/sony_official_product_details.js" charset="UTF-8"></script>
+  <script src="search.js?v=clean-nav-labels" charset="UTF-8"></script>
+</body>
+</html>

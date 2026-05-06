@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sony Alpha Settings</title>
+  <link rel="stylesheet" href="style.css?v=clean-nav-labels" />
+</head>
+<body class="settings-page">
+  <header class="navbar">
+    <div class="nav-inner">
+      <div class="logo" aria-label="Sony Alpha Settings">
+        <a class="logo-sony" href="index.html" aria-label="Sony 首页">
+          <img src="images/sony-seeklogo.png" alt="SONY" />
+        </a>
+        <a class="logo-shop-title" href="settings.html" aria-label="刷新设置页面">设置</a>
+      </div>
+      <nav class="nav-links" aria-label="页面导航">
+        <a href="shop.html#shop-contact-footer">联系我们</a>
+        <a href="shop.html">影像商城</a>
+        <a href="search.html">产品检索</a>
+        <div class="nav-dropdown">
+          <a class="nav-dropdown-trigger" href="orders.html">我的</a>
+          <div class="nav-dropdown-menu" aria-label="我的菜单">
+            <a href="orders.html">我的订单</a>
+            <a href="settings.html">设置</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="settings-shell">
+    <section class="settings-hero" aria-labelledby="settings-title">
+      <div>
+        <span>账户中心</span>
+        <h1 id="settings-title">设置</h1>
+      </div>
+      <button type="button" class="settings-ghost-button" data-settings-action="save-all">保存全部设置</button>
+    </section>
+
+    <section class="settings-layout" aria-label="设置内容">
+      <aside class="settings-profile-card">
+        <div class="settings-avatar" aria-hidden="true">S</div>
+        <h2>Sony Alpha 用户</h2>
+        <span>本地演示账户</span>
+        <div class="settings-profile-actions">
+          <button type="button" data-settings-action="edit-profile">编辑资料</button>
+          <button type="button" data-settings-action="account-security">账户安全</button>
+        </div>
+      </aside>
+
+      <section class="settings-content">
+        <div class="settings-section-head">
+          <h2>常用设置</h2>
+          <span>所有功能接口已预留，后续可以逐项接入真实逻辑。</span>
+        </div>
+
+        <div class="settings-grid">
+          <article class="settings-card" data-settings-panel="profile">
+            <div>
+              <h3>个人资料</h3>
+              <span>姓名、头像、联系方式、账户展示信息</span>
+            </div>
+            <button type="button" data-settings-action="open-profile">管理</button>
+          </article>
+
+          <article class="settings-card" data-settings-panel="security">
+            <div>
+              <h3>登录与安全</h3>
+              <span>密码、设备登录、二次验证、风险提醒</span>
+            </div>
+            <button type="button" data-settings-action="open-security">管理</button>
+          </article>
+
+          <article class="settings-card" data-settings-panel="privacy">
+            <div>
+              <h3>隐私权限</h3>
+              <span>浏览足迹、个性化推荐、数据使用偏好</span>
+            </div>
+            <button type="button" data-settings-action="open-privacy">管理</button>
+          </article>
+
+          <article class="settings-card" data-settings-panel="address">
+            <div>
+              <h3>收货地址</h3>
+              <span>默认地址、地图选址、配送信息维护</span>
+            </div>
+            <button type="button" data-settings-action="open-address">管理</button>
+          </article>
+
+          <article class="settings-card" data-settings-panel="payment">
+            <div>
+              <h3>支付方式</h3>
+              <span>银行卡、扫码支付、默认支付偏好</span>
+            </div>
+            <button type="button" data-settings-action="open-payment">管理</button>
+          </article>
+
+          <article class="settings-card" data-settings-panel="notification">
+            <div>
+              <h3>通知偏好</h3>
+              <span>订单、优惠、新品、售后与系统消息</span>
+            </div>
+            <button type="button" data-settings-action="open-notification">管理</button>
+          </article>
+        </div>
+
+        <section class="settings-preferences" aria-labelledby="settings-preferences-title">
+          <div class="settings-section-head">
+            <h2 id="settings-preferences-title">偏好开关</h2>
+            <span>当前仅保留交互接口，不写入真实账户数据。</span>
+          </div>
+
+          <div class="settings-toggle-list">
+            <label class="settings-toggle">
+              <span>
+                <strong>订单状态提醒</strong>
+                <em>付款、发货、收货与售后节点通知</em>
+              </span>
+              <input type="checkbox" data-settings-toggle="order-notice" checked />
+              <i aria-hidden="true"></i>
+            </label>
+
+            <label class="settings-toggle">
+              <span>
+                <strong>新品与优惠提醒</strong>
+                <em>接收新品发布、活动与价格提醒</em>
+              </span>
+              <input type="checkbox" data-settings-toggle="promotion-notice" />
+              <i aria-hidden="true"></i>
+            </label>
+
+            <label class="settings-toggle">
+              <span>
+                <strong>保留浏览足迹</strong>
+                <em>用于我的足迹和继续浏览体验</em>
+              </span>
+              <input type="checkbox" data-settings-toggle="footprint-history" checked />
+              <i aria-hidden="true"></i>
+            </label>
+          </div>
+        </section>
+
+        <section class="settings-danger" aria-labelledby="settings-danger-title">
+          <div>
+            <h2 id="settings-danger-title">数据与账户</h2>
+            <span>清理缓存、导出数据、注销账户等高风险功能接口。</span>
+          </div>
+          <div>
+            <button type="button" data-settings-action="export-data">导出数据</button>
+            <button type="button" data-settings-action="clear-cache">清理缓存</button>
+            <button type="button" data-settings-action="delete-account">注销账户</button>
+          </div>
+        </section>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
